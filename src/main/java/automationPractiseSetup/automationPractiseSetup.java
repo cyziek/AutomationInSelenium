@@ -5,6 +5,7 @@ import automationPractisePages.automationPractiseLoginPage;
 import automationPractisePages.automationPractiseSignUpPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -23,21 +24,26 @@ public class automationPractiseSetup {
     public void setup(){
         System.setProperty("webdriver.chrome.driver","D:\\ChromeDriver\\chromedriver.exe");
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("http://automationpractice.com/index.php");
     }
 
     @Test
     public void navigateToHomepage(){
         objAutomationPractiseHomePage = new automationPractiseHomePage(driver);
-        objAutomationPractiseHomePage.verifyPageTitle();
+        objAutomationPractiseHomePage.verifyPageHeader();
         objAutomationPractiseHomePage.verifyPageTitle();
         objAutomationPractiseHomePage.clickOnSignUp();
+
     }
 
     @Test
-    public void navigateToLoginPage(){
-
+    public void CreatingAnAccount(){
+        objautomationPractiseLoginPage = new automationPractiseLoginPage(driver);
+        objautomationPractiseLoginPage.typeEmailAddress("incorrectEmail.pl");
+        objautomationPractiseLoginPage.clickRegisterButton();
+        objautomationPractiseLoginPage.valCorrectEmailAddress();
+//        objautomationPractiseLoginPage.checkPageTitle();
     }
+
 
 }
