@@ -45,22 +45,24 @@ public class automationPractiseLoginPage {
         wait.until(ExpectedConditions.titleIs(titleName));
         Assert.assertEquals(titleName, driver.getTitle());
     }
-
-    public void typeEmailAddress(String email) {
+    public void clearEmailFieldText(){
         wait.until(ExpectedConditions.visibilityOf(txtFieldEmailAddress));
         txtFieldEmailAddress.clear();
+    }
+
+    public void typeEmailAddress(String email) throws InterruptedException {
+        wait.until(ExpectedConditions.visibilityOf(txtFieldEmailAddress));
         txtFieldEmailAddress.sendKeys(email);
         txtFieldEmailAddress.sendKeys(Keys.TAB); //click outside the email text field
     }
 
     public void valWrongEmailAddress() {
-        wait.until(ExpectedConditions.visibilityOfAllElements(iconInvalidEmail, alertInvalidEmail));
-        Assert.assertTrue(iconInvalidEmail.isDisplayed() && alertInvalidEmail.isDisplayed() && !iconValidEmail.isDisplayed());
+        Assert.assertTrue(iconInvalidEmail.isDisplayed());
     }
 
     public void valCorrectEmailAddress() {
         wait.until(ExpectedConditions.visibilityOf(iconValidEmail));
-        Assert.assertTrue(iconValidEmail.isDisplayed() && !alertInvalidEmail.isDisplayed() && !iconInvalidEmail.isDisplayed());
+        Assert.assertTrue(iconValidEmail.isDisplayed());
     }
 
     public void clickRegisterButton() {
